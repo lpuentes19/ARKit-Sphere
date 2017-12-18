@@ -33,6 +33,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func createSphere(at position: SCNVector3) -> SCNNode {
         let sphere = SCNSphere(radius: 0.1)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "art.scnassets/earth.jpeg")
+        sphere.firstMaterial = material
         let sphereMode = SCNNode(geometry: sphere)
         sphereMode.position = position
         
