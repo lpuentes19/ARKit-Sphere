@@ -25,7 +25,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a new scene
         let scene = SCNScene()
-        
+        let position = SCNVector3(0, 0, -0.3)
+        let globe = createSphere(at: position)
+        scene.rootNode.addChildNode(globe)
         
         // Set the scene to the view
         sceneView.scene = scene
