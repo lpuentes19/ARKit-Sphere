@@ -29,6 +29,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let globe = createSphere(at: position)
         scene.rootNode.addChildNode(globe)
         
+        let action = SCNAction.rotate(by: 360 * CGFloat((Double.pi)/180), around: SCNVector3(0, 1, 0), duration: 12)
+        let repeatAction = SCNAction.repeatForever(action)
+        
+        globe.runAction(repeatAction)
+        
         // Set the scene to the view
         sceneView.scene = scene
     }
@@ -36,7 +41,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func createSphere(at position: SCNVector3) -> SCNNode {
         let sphere = SCNSphere(radius: 0.1)
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/earth.jpeg")
+        material.diffuse.contents = UIImage(named: "art.scnassets/earth.jpg")
         sphere.firstMaterial = material
         let sphereMode = SCNNode(geometry: sphere)
         sphereMode.position = position
