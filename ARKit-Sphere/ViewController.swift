@@ -13,7 +13,7 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    
+    var globe: SCNNode!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,13 +26,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Create a new scene
         let scene = SCNScene()
         let position = SCNVector3(0, 0, -0.3)
-        let globe = createSphere(at: position)
+        globe = createSphere(at: position)
         scene.rootNode.addChildNode(globe)
         
-        let action = SCNAction.rotate(by: 360 * CGFloat((Double.pi)/180), around: SCNVector3(0, 1, 0), duration: 12)
-        let repeatAction = SCNAction.repeatForever(action)
-        
-        globe.runAction(repeatAction)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(spinGlobe))
+        sceneView.addGestureRecognizer(tap)
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -47,6 +45,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sphereMode.position = position
         
         return sphereMode
+    }
+    
+    @objc func spinGlobe() {
+        let action = SCNAction.rotate(by: 360 * CGFloat((Double.pi)/180), around: SCNVector3(0, 1, 0), duration: 12)
+        let repeatAction = SCNAction.repeatForever(action)
+        
+        globe.runAction(repeatAction)
     }
     
     override func viewWillAppear(_ animated: Bool) {
