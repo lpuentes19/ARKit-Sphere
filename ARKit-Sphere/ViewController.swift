@@ -49,9 +49,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func spinGlobe() {
         let action = SCNAction.rotate(by: 360 * CGFloat((Double.pi)/180), around: SCNVector3(0, 1, 0), duration: 12)
-        let repeatAction = SCNAction.repeatForever(action)
+        // let repeatAction = SCNAction.repeatForever(action)
         
-        globe.runAction(repeatAction)
+        globe.runAction(action)
     }
     
     override func viewWillAppear(_ animated: Bool) {
